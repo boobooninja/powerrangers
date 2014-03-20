@@ -1,3 +1,18 @@
+module Fight
+  def punch person
+    if @caffeine_level >= 5
+      puts "#{person.name} was somersaulted into the air by #{@name}"
+      @caffeine_level -= 5
+    else
+      @caffeine_level = 0
+    end
+
+    person.scream.run
+
+    return self
+  end
+end
+
 class Person
   attr_accessor :name, :caffeine_level
 
@@ -24,6 +39,8 @@ class Person
 end
 
 class PowerRanger < Person
+  include Fight
+
   attr_accessor :strength, :color
 
   def initialize name, strength, color
@@ -36,19 +53,6 @@ class PowerRanger < Person
     puts "#{person.name} has been blasted to space"
   end
 
-  def punch person
-    if @caffeine_level >= 5
-      puts "#{person.name} was somersaulted into the air by #{@name}"
-      @caffeine_level -= 5
-    else
-      @caffeine_level = 0
-    end
-
-    person.scream.run
-
-    return self
-  end
-
   def rest
     puts "#{@name} says... whew! I needed a break!"
     return self
@@ -56,25 +60,14 @@ class PowerRanger < Person
 end
 
 class EvilNinja < Person
+  include Fight
+
   attr_accessor :strength, :evilness
 
   def initialize name, strength, evilness
     super name
     @strength = strength
     @evilness = evilness
-  end
-
-  def punch person
-    if @caffeine_level >= 5
-      puts "#{person.name} was somersaulted into the air by #{@name}"
-      @caffeine_level -= 5
-    else
-      @caffeine_level = 0
-    end
-
-    person.scream.run
-
-    return self
   end
 
   def cause_mayhem person
